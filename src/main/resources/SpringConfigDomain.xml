@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+<context:property-placeholder location="classpath:users.properties,classpath:tickets.properties,classpath:events.properties,classpath:auditoriums.properties"/>
+
+<bean id="tomas" class="com.epam.spring.homework.domain.User">
+    <property name="id" value="${user0.id}"/>
+    <property name="firstName" value="${user0.firstName}"/>
+    <property name="lastName" value="${user0.lastName}"/>
+    <property name="email" value="${user0.email}"/>
+    <property name="role" value="${user0.role}"/>
+</bean>
+<bean id="george" class="com.epam.spring.homework.domain.User">
+    <property name="id" value="${user1.id}"/>
+    <property name="firstName" value="${user1.firstName}"/>
+    <property name="lastName" value="${user1.lastName}"/>
+    <property name="email" value="${user1.email}"/>
+    <property name="role" value="${user1.role}"/>
+</bean>
+<bean id="avraam" class="com.epam.spring.homework.domain.User">
+    <property name="id" value="${user2.id}"/>
+    <property name="firstName" value="${user2.firstName}"/>
+    <property name="lastName" value="${user2.lastName}"/>
+    <property name="email" value="${user2.email}"/>
+    <property name="role" value="${user2.role}"/>
+</bean>
+
+<bean id="formatterYMDHM" class="java.time.format.DateTimeFormatter" factory-method="ofPattern">
+    <constructor-arg index="0" value="yyyy-MM-dd HH:mm"/>
+</bean>
+
+<bean id="tweanPeaksAuditoriums" class="java.util.LinkedHashMap">
+    <constructor-arg>
+        <map>
+            <entry>
+                <key>
+                    <bean class="java.time.LocalDateTime" factory-method="parse">
+                        <constructor-arg index="0" value="2016-06-11 12:30"/>
+                        <constructor-arg index="1" ref="formatterYMDHM"/>
+                    </bean>
+                </key>
+                <ref bean="bigAuditorium"/>
+            </entry>
+            <entry>
+                <key>
+                    <bean class="java.time.LocalDateTime" factory-method="parse">
+                        <constructor-arg index="0" value="2016-06-11 19:30"/>
+                        <constructor-arg index="1" ref="formatterYMDHM"/>
+                    </bean>
+                </key>
+                <ref bean="mediumAuditorium"/>
+            </entry>
+            <entry>
+                <key>
+                    <bean class="java.time.LocalDateTime" factory-method="parse">
+                        <constructor-arg index="0" value="2016-06-12 12:30"/>
+                        <constructor-arg index="1" ref="formatterYMDHM"/>
+                    </bean>
+                </key>
+                <ref bean="mediumAuditorium"/>
+            </entry>
+            <entry>
+                <key>
+                    <bean class="java.time.LocalDateTime" factory-method="parse">
+                        <constructor-arg index="0" value="2016-06-12 18:30"/>
+                        <constructor-arg index="1" ref="formatterYMDHM"/>
+                    </bean>
+                </key>
+                <ref bean="smallAuditorium"/>
+            </entry>
+        </map>
+    </constructor-arg>
+</bean>
+
+<bean id="inceptionAuditoriums" class="java.util.LinkedHashMap">
+    <constructor-arg>
+        <map>
+            <entry>
+                <key>
+                    <bean class="java.time.LocalDateTime" factory-method="parse">
+                        <constructor-arg index="0" value="2016-06-11 14:30"/>
+                        <constructor-arg index="1" ref="formatterYMDHM"/>
+                    </bean>
+                </key>
+                <ref bean="bigAuditorium"/>
+            </entry>
+            <entry>
+                <key>
+                    <bean class="java.time.LocalDateTime" factory-method="parse">
+                        <constructor-arg index="0" value="2016-06-11 21:30"/>
+                        <constructor-arg index="1" ref="formatterYMDHM"/>
+                    </bean>
+                </key>
+                <ref bean="mediumAuditorium"/>
+            </entry>
+            <entry>
+                <key>
+                    <bean class="java.time.LocalDateTime" factory-method="parse">
+                        <constructor-arg index="0" value="2016-06-12 14:30"/>
+                        <constructor-arg index="1" ref="formatterYMDHM"/>
+                    </bean>
+                </key>
+                <ref bean="mediumAuditorium"/>
+            </entry>
+            <entry>
+                <key>
+                    <bean class="java.time.LocalDateTime" factory-method="parse">
+                        <constructor-arg index="0" value="2016-06-12 20:30"/>
+                        <constructor-arg index="1" ref="formatterYMDHM"/>
+                    </bean>
+                </key>
+                <ref bean="smallAuditorium"/>
+            </entry>
+        </map>
+    </constructor-arg>
+</bean>
+
+<bean id="transformersAuditoriums" class="java.util.LinkedHashMap">
+    <constructor-arg>
+        <map>
+            <entry>
+                <key>
+                    <bean class="java.time.LocalDateTime" factory-method="parse">
+                        <constructor-arg index="0" value="2016-06-13 12:30"/>
+                        <constructor-arg index="1" ref="formatterYMDHM"/>
+                    </bean>
+                </key>
+                <ref bean="smallAuditorium"/>
+            </entry>
+            <entry>
+                <key>
+                    <bean class="java.time.LocalDateTime" factory-method="parse">
+                        <constructor-arg index="0" value="2016-06-13 19:30"/>
+                        <constructor-arg index="1" ref="formatterYMDHM"/>
+                    </bean>
+                </key>
+                <ref bean="smallAuditorium"/>
+            </entry>
+            <entry>
+                <key>
+                    <bean class="java.time.LocalDateTime" factory-method="parse">
+                        <constructor-arg index="0" value="2016-06-14 12:30"/>
+                        <constructor-arg index="1" ref="formatterYMDHM"/>
+                    </bean>
+                </key>
+                <ref bean="bigAuditorium"/>
+            </entry>
+            <entry>
+                <key>
+                    <bean class="java.time.LocalDateTime" factory-method="parse">
+                        <constructor-arg index="0" value="2016-06-14 18:30"/>
+                        <constructor-arg index="1" ref="formatterYMDHM"/>
+                    </bean>
+                </key>
+                <ref bean="bigAuditorium"/>
+            </entry>
+        </map>
+    </constructor-arg>
+</bean>
+
+<bean id="tweanPeaks" class="com.epam.spring.homework.domain.Event">
+    <property name="id" value="${event0.id}"/>
+    <property name="name" value="${event0.name}"/>
+    <property name="basePrice" value="${event0.basePrice}"/>
+    <property name="rating" value="${event0.rating}"/>
+    <property name="auditoriums" ref="tweanPeaksAuditoriums"/>
+
+</bean>
+<bean id="inception" class="com.epam.spring.homework.domain.Event">
+    <property name="id" value="${event1.id}"/>
+    <property name="name" value="${event1.name}"/>
+    <property name="basePrice" value="${event1.basePrice}"/>
+    <property name="rating" value="${event1.rating}"/>
+    <property name="auditoriums" ref="inceptionAuditoriums"/>
+</bean>
+<bean id="transformers" class="com.epam.spring.homework.domain.Event">
+    <property name="id" value="${event2.id}"/>
+    <property name="name" value="${event2.name}"/>
+    <property name="basePrice" value="${event2.basePrice}"/>
+    <property name="rating" value="${event2.rating}"/>
+    <property name="auditoriums" ref="transformersAuditoriums"/>
+</bean>
+    
+<bean id="bigAuditorium" class="com.epam.spring.homework.domain.Auditorium">
+    <property name="name" value="${auditorium0.name}"/>
+    <property name="numberOfSeats" value="${auditorium0.numberOfSeats}"/>
+    <property name="vipSeats" value="${auditorium0.vipSeats}"/>
+</bean>
+<bean id="mediumAuditorium" class="com.epam.spring.homework.domain.Auditorium">
+    <property name="name" value="${auditorium1.name}"/>
+    <property name="numberOfSeats" value="${auditorium1.numberOfSeats}"/>
+    <property name="vipSeats" value="${auditorium1.vipSeats}"/>
+</bean>
+<bean id="smallAuditorium" class="com.epam.spring.homework.domain.Auditorium">
+    <property name="name" value="${auditorium2.name}"/>
+    <property name="numberOfSeats" value="${auditorium2.numberOfSeats}"/>
+    <property name="vipSeats" value="${auditorium2.vipSeats}"/>
+</bean>
+</beans>

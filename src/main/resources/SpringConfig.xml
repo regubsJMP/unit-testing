@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+<import resource="SpringConfigDomain.xml"/>
+
+<!--DAO-->
+<bean id="auditoriumDAO" class="com.epam.spring.homework.dao.impl.maps.AuditoriumDAOMapsImpl">
+    <property name="auditoriums">
+        <map>
+            <entry key="0" value-ref="bigAuditorium"/>
+            <entry key="1" value-ref="mediumAuditorium"/>
+            <entry key="2" value-ref="smallAuditorium"/>
+        </map>
+    </property>
+</bean>
+<bean id="eventDAO" class="com.epam.spring.homework.dao.impl.maps.EventDAOMapsImpl">
+    <property name="events">
+        <map>
+            <entry key="#{tweanPeaks.id}" value-ref="tweanPeaks"/>
+            <entry key="#{inception.id}" value-ref="inception"/>
+            <entry key="#{transformers.id}" value-ref="transformers"/>
+        </map>
+    </property>
+</bean>
+<bean id="userDAO" class="com.epam.spring.homework.dao.impl.maps.UserDAOMapsImpl">
+    <property name="users">
+        <map>
+            <entry key="#{tomas.id}" value-ref="tomas"/>
+            <entry key="#{george.id}" value-ref="george"/>
+            <entry key="#{avraam.id}" value-ref="avraam"/>
+        </map>
+    </property>
+</bean>
+<bean id="ticketDAO" class="com.epam.spring.homework.dao.impl.maps.TicketDAOMapsImpl"/>
+
+
+<!--Services-->
+<bean id="auditoriumService" class="com.epam.spring.homework.service.impl.AuditoriumServiceImpl">
+    <property name="auditoriumDAO" ref="auditoriumDAO"/>
+</bean>
+<bean id="bookingService" class="com.epam.spring.homework.service.impl.BookingServiceImpl">
+    <property name="auditoriumDAO" ref="auditoriumDAO"/>
+    <property name="eventDAO" ref="eventDAO"/>
+    <property name="userDAO" ref="userDAO"/>
+    <property name="ticketDAO" ref="ticketDAO"/>
+    <property name="discountService" ref="discountService"/>
+</bean>
+<bean id="discountService" class="com.epam.spring.homework.service.impl.DiscountServiceImpl">
+    <!--<property name="auditoriumDAO" ref="auditoriumDAO"/>
+    <property name="eventDAO" ref="eventDAO"/>
+    <property name="userDAO" ref="userDAO"/>
+    <property name="ticketDAO" ref="ticketDAO"/>-->
+    <property name="discountStrategies">
+        <list>
+            <bean class="com.epam.spring.homework.discount.impl.DiscountStrategyBirthdayImpl"/>
+            <bean class="com.epam.spring.homework.discount.impl.DiscountStrategyTenTicketsImpl"/>
+        </list>
+    </property>
+</bean>
+<bean id="eventService" class="com.epam.spring.homework.service.impl.EventServiceImpl">
+    <property name="eventDAO" ref="eventDAO"/>
+</bean>
+<bean id="userService" class="com.epam.spring.homework.service.impl.UserServiceImpl">
+    <property name="userDAO" ref="userDAO"/>
+</bean>
+
+</beans>

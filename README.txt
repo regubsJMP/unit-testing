@@ -1,0 +1,1 @@
+Written tests: TestAuditoriumServiceImpl, TestUserServiceImpl
